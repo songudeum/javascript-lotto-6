@@ -19,8 +19,9 @@ class LottoPrizeCalculator {
     }
 
     #validateBonusNumber(prizeNumberList, bonusNumber) {
+        const bonusNumberToNumber = bonusNumber / 1;
         bonusNumberValidator.forEach((validator) => validator(bonusNumber));
-        if (prizeNumberList.includes(bonusNumber)) {
+        if (prizeNumberList.includes(bonusNumberToNumber)) {
             throw new Error(DUPLICATE_BONUS_NUMBER_ERROR);
         }
     }

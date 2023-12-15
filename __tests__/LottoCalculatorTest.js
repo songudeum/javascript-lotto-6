@@ -10,4 +10,23 @@ describe("당첨 계산기 테스트", () => {
             );
         }
     );
+
+    test.each(["0", "46", "1,2", "1 2"])(
+        "보너스 번호에 대한 예외 처리 테스트",
+        (input) => {
+            const prizeNumber = "1,2,3,4,5,6";
+            expect(() => new LottoPrizeCalculator(prizeNumber, input)).toThrow(
+                "[ERROR]"
+            );
+        }
+    );
+
+    test("당첨번호와 주문 번호가 동일한 경우 에러", () => {
+        const prizeNumber = "1,2,3,4,5,6";
+        const input = "1";
+
+        expect(() => new LottoPrizeCalculator(prizeNumber, input)).toThrow(
+            "[ERROR]"
+        );
+    });
 });
