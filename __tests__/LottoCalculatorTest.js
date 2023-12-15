@@ -1,13 +1,11 @@
-import LottoPrizeCalculator from "../src/LottoPrizeCalculator";
+import LottoPrize from "../src/LottoPrize";
 
 describe("당첨 계산기 테스트", () => {
     test.each(["1,2,3,4,5,0", "1,2,3", "일,2,3,4,5,6", "1,1,1,2,3,4"])(
         "당첨 번호에 대한 예외 처리 테스트",
         (input) => {
             const bonusNumber = 1;
-            expect(() => new LottoPrizeCalculator(input, bonusNumber)).toThrow(
-                "[ERROR]"
-            );
+            expect(() => new LottoPrize(input, bonusNumber)).toThrow("[ERROR]");
         }
     );
 
@@ -15,9 +13,7 @@ describe("당첨 계산기 테스트", () => {
         "보너스 번호에 대한 예외 처리 테스트",
         (input) => {
             const prizeNumber = "1,2,3,4,5,6";
-            expect(() => new LottoPrizeCalculator(prizeNumber, input)).toThrow(
-                "[ERROR]"
-            );
+            expect(() => new LottoPrize(prizeNumber, input)).toThrow("[ERROR]");
         }
     );
 
@@ -25,9 +21,7 @@ describe("당첨 계산기 테스트", () => {
         const prizeNumber = "1,2,3,4,5,6";
         const input = "1";
 
-        expect(() => new LottoPrizeCalculator(prizeNumber, input)).toThrow(
-            "[ERROR]"
-        );
+        expect(() => new LottoPrize(prizeNumber, input)).toThrow("[ERROR]");
     });
 
     test("당첨 여부를 배열에 저장한다.", async () => {
@@ -39,10 +33,7 @@ describe("당첨 계산기 테스트", () => {
         const bonusNumber = "7";
         const result = [6, "5bonus"];
 
-        const lottoPrizeCalculator = new LottoPrizeCalculator(
-            prizeNumber,
-            bonusNumber
-        );
+        const lottoPrizeCalculator = new LottoPrize(prizeNumber, bonusNumber);
 
         await expect(lottoPrizeCalculator.calculateMatchResult(lotto)).toEqual(
             result
@@ -58,10 +49,7 @@ describe("당첨 계산기 테스트", () => {
         const bonusNumber = "7";
         const result = 2030000000;
 
-        const lottoPrizeCalculator = new LottoPrizeCalculator(
-            prizeNumber,
-            bonusNumber
-        );
+        const lottoPrizeCalculator = new LottoPrize(prizeNumber, bonusNumber);
 
         await expect(lottoPrizeCalculator.calculateTotalPrize(lotto)).toEqual(
             result
@@ -75,12 +63,9 @@ describe("당첨 계산기 테스트", () => {
         ];
         const prizeNumber = "1,2,3,4,5,6";
         const bonusNumber = "7";
-        const result = (101500000).toFixed(2);
+        const result = (101500000).toFixed(1);
 
-        const lottoPrizeCalculator = new LottoPrizeCalculator(
-            prizeNumber,
-            bonusNumber
-        );
+        const lottoPrizeCalculator = new LottoPrize(prizeNumber, bonusNumber);
 
         await expect(lottoPrizeCalculator.calculateTotalProfit(lotto)).toEqual(
             result
