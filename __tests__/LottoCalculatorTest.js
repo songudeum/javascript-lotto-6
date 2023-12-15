@@ -48,4 +48,42 @@ describe("당첨 계산기 테스트", () => {
             result
         );
     });
+
+    test("당첨 금액을 계산한다.", async () => {
+        const lotto = [
+            [1, 2, 3, 4, 5, 6],
+            [2, 3, 4, 5, 6, 7],
+        ];
+        const prizeNumber = "1,2,3,4,5,6";
+        const bonusNumber = "7";
+        const result = 2030000000;
+
+        const lottoPrizeCalculator = new LottoPrizeCalculator(
+            prizeNumber,
+            bonusNumber
+        );
+
+        await expect(lottoPrizeCalculator.calculateTotalPrize(lotto)).toEqual(
+            result
+        );
+    });
+
+    test("수익률을 계산한다.", async () => {
+        const lotto = [
+            [1, 2, 3, 4, 5, 6],
+            [2, 3, 4, 5, 6, 7],
+        ];
+        const prizeNumber = "1,2,3,4,5,6";
+        const bonusNumber = "7";
+        const result = (101500000).toFixed(2);
+
+        const lottoPrizeCalculator = new LottoPrizeCalculator(
+            prizeNumber,
+            bonusNumber
+        );
+
+        await expect(lottoPrizeCalculator.calculateTotalProfit(lotto)).toEqual(
+            result
+        );
+    });
 });

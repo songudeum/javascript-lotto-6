@@ -1,6 +1,7 @@
 import { lottoNumberValidator } from "./utils/lottoNumberValidator";
 import { bonusNumberValidator } from "./utils/bonusNumberValidator";
 import { DUPLICATE_BONUS_NUMBER_ERROR } from "./utils/script";
+import { priceOfPrize } from "./utils/priceOfPrize";
 class LottoPrizeCalculator {
     #prizeNumberList;
     #bonusNumber;
@@ -53,7 +54,20 @@ class LottoPrizeCalculator {
         return oneOfLotto.includes(this.#bonusNumber) ? "5bonus" : 5;
     }
 
-    
+    calculateTotalPrize(lotto) {
+        const matchResult = this.calculateMatchResult(lotto);
+        const totalPrize = matchResult.reduce(
+            (acc, result) => acc + priceOfPrize[result],
+            0
+        );
+        return totalPrize;
+    }
+
+    calculateTotalProfit(lotto) {
+        const totalPrize = this.calculateTotalPrize(lotto);
+        const purchaseCost = lotto.length * 1000;
+        return ((totalPrize / purchaseCost) * 100).toFixed(2);
+    }
 }
 
 export default LottoPrizeCalculator;
