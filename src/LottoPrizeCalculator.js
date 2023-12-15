@@ -1,25 +1,18 @@
-import {
-    INSUFFICIENT_LOTTO_NUMBERS_ERROR,
-    INVALID_LOTTO_NUMBERS_ERROR,
-    INVALID_BONUS_NUMBER_ERROR,
-    DUPLICATE_BONUS_NUMBER_ERROR,
-} from "./utils/script";
+import { lottoNumberValidator } from "./utils/lottoNumberValidator";
 
 class LottoPrizeCalculator {
     #prizeNumber;
     #bonusNumber;
 
     constructor(numbers, bonusNumber) {
-        this.#validatePrizeNumber(numbers.split(","));
-        this.#validateBonusNumber(bonusNumber);
-        this.#prizeNumber = numbers.split(",");
-        this.#bonusNumber = bonusNumber;
+        this.#validatePrizeNumber(numbers.split(",").map((el) => Number(el)));
+        this.#validateBonusNumber(bonusNumber / 1);
+        this.#prizeNumber = numbers.split(",").map((el) => Number(el));
+        this.#bonusNumber = bonusNumber / 1;
     }
 
     #validatePrizeNumber(numbers) {
-        if (numbers.length !== 6) {
-            throw new Error(INSUFFICIENT_LOTTO_NUMBERS_ERROR);
-        }
+        lottoNumberValidator.forEach((validator) => validator(numbers));
     }
 
     #validateBonusNumber(bonusNumber) {

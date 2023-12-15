@@ -1,7 +1,7 @@
 import {
     INSUFFICIENT_LOTTO_NUMBERS_ERROR,
     INVALID_LOTTO_NUMBERS_ERROR,
-} from "./utils/script";
+} from "./script";
 
 const isInValidRangeOfNumber = (numbers) => {
     const filteredNumbers = numbers.filter((el) => 1 <= el && el <= 45);
