@@ -29,4 +29,23 @@ describe("당첨 계산기 테스트", () => {
             "[ERROR]"
         );
     });
+
+    test("당첨 여부를 배열에 저장한다.", async () => {
+        const lotto = [
+            [1, 2, 3, 4, 5, 6],
+            [2, 3, 4, 5, 6, 7],
+        ];
+        const prizeNumber = "1,2,3,4,5,6";
+        const bonusNumber = "7";
+        const result = [6, "5bonus"];
+
+        const lottoPrizeCalculator = new LottoPrizeCalculator(
+            prizeNumber,
+            bonusNumber
+        );
+
+        await expect(lottoPrizeCalculator.calculateMatchResult(lotto)).toEqual(
+            result
+        );
+    });
 });
